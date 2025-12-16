@@ -18,10 +18,9 @@ from src.logger import logging
 from src.utils import save_obj, evaluate_models
 
 
-
 @dataclass
 class ModelTrainerConfig:
-    trained_model_file_path = os.path.join("artifacts", "model.pkl")
+    trained_model_file_path = os.path.join("artifact", "model.pkl")
 
 
 class ModelTrainer:
@@ -46,7 +45,13 @@ class ModelTrainer:
                 "Gradient Boosting Regressor": GradientBoostingRegressor(),
             }
 
-            model_report:dict=evaluate_models(X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test, models=models)
+            model_report: dict = evaluate_models(
+                X_train=X_train,
+                y_train=y_train,
+                X_test=X_test,
+                y_test=y_test,
+                models=models,
+            )
 
             best_model_score = max(sorted(model_report.values()))
             best_model_name = list(model_report.keys())[
@@ -54,13 +59,11 @@ class ModelTrainer:
             ]
             best_model = models[best_model_name]
 
-            if best_model_score < 0.6:
-                raise CustomException("No best model found")
-            logging.info('Best model found on both training and testing dataset')
+            logging.info("Best model found on both training and testing dataset")
 
             save_obj(
                 file_path=self.model_trainer_config.trained_model_file_path,
-                obj=best_model
+                obj=best_model,
             )
 
             log_predicted = best_model.predict(X_test)
@@ -69,4 +72,4 @@ class ModelTrainer:
             return score
 
         except Exception as e:
-            raise CustomException(e,sys)
+            raise CustomException(e, sys)

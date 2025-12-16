@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Cost (USA) Prediction Form</title>
+    <style>
+        /* Simple styling for better readability */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Important for padding/width calculation */
+        }
+        .radio-group label {
+            display: inline-block;
+            font-weight: normal;
+            margin-right: 15px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Insurance Prediction Input</h2>
+    <form action="{{ url_for('predict_datapoint')}}"  method="post">
+        
+        <div class="form-group">
+            <label for="age">Age (18 to 64):</label>
+            <input 
+                type="number" 
+                id="age" 
+                name="age" 
+                min="18" 
+                max="64" 
+                required 
+                placeholder="e.g., 35"
+            >
+        </div>
+
+        <div class="form-group">
+            <label>Sex:</label>
+            <div class="radio-group">
+                <input type="radio" id="sex_male" name="sex" value="male" required>
+                <label for="sex_male">Male</label>
+                
+                <input type="radio" id="sex_female" name="sex" value="female">
+                <label for="sex_female">Female</label>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="bmi">BMI (15.5 to 54.0):</label>
+            <input 
+                type="number" 
+                id="bmi" 
+                name="bmi" 
+                min="15.5" 
+                max="54" 
+                step="0.1" 
+                required 
+                placeholder="e.g., 28.5"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="children">Number of Children (0 to 5):</label>
+            <input 
+                type="number" 
+                id="children" 
+                name="children" 
+                min="0" 
+                max="5" 
+                required 
+                placeholder="e.g., 2"
+            >
+        </div>
+
+        <div class="form-group">
+            <label>Smoker:</label>
+            <div class="radio-group">
+                <input type="radio" id="smoker_yes" name="smoker" value="yes" required>
+                <label for="smoker_yes">Yes</label>
+                
+                <input type="radio" id="smoker_no" name="smoker" value="no">
+                <label for="smoker_no">No</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="region">Region in the United States:</label>
+            <select id="region" name="region" required>
+                <option value="" disabled selected>Select your region</option>
+                <option value="southwest">Southwest</option>
+                <option value="southeast">Southeast</option>
+                <option value="northwest">Northwest</option>
+                <option value="northeast">Northeast</option>
+            </select>
+        </div>
+
+        <button type="submit">Get Prediction</button>
+        
+    </form>
+</div>
+<h2>
+    Your yearly insurance premium would be ~{{results}} USD.
+</h2>
+
+</body>
+</html>
