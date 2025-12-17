@@ -9,8 +9,7 @@ The focus of this project goes beyond model training — it demonstrates **real-
 
 ## Problem Statement
 
-Medical insurance charges vary significantly based on factors such as age, BMI, smoking habits, and geographic region.  
-The objective of this project is to **predict insurance charges** using supervised regression models and deploy the model as a **production-ready web application**.
+Medical insurance charges vary significantly based on factors such as age, BMI, smoking habits, and geographic region. This dataset was used for training the model: https://www.kaggle.com/datasets/mirichoi0218/insurance/data. The objective of this project is to **predict insurance charges** using regression models and deploy the model as a **production-ready web application**.
 
 ---
 
